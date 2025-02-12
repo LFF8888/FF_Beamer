@@ -1,0 +1,96 @@
+% 设置文档模式为演示模式
+\mode<presentation>
+
+% 定义一个条件变量 ifbeamer@secheader，用于控制是否显示章节标题
+\newif\ifbeamer@secheader
+\beamer@secheaderfalse % 默认不显示章节标题
+
+% 处理 Beamer 选项
+%\DeclareOptionBeamer{secheader}{\beamer@secheadertrue} % 可选项声明（已注释）
+\ProcessOptionsBeamer % 处理选项
+
+% 使用外部主题，设置页脚格式
+\useoutertheme[footline=authorinstitutetitle,subsection=false]{smoothbars}
+\makeatletter % 开始定义新的命令
+
+% 定义当前页/总页数的格式
+\newcommand{\frameofframes}{/} % 定义当前页与总页数之间的分隔符
+\newcommand{\setframeofframes}[1]{\renewcommand{\frameofframes}{#1}} % 设置分隔符的命令
+
+% 设置页脚模板
+\setbeamertemplate{footline} 
+  {%
+    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot} % 上分隔线
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}% 作者信息框
+      \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}% 插入作者名
+      \hfill%
+      {\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}% 插入机构名
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}% 标题信息框
+      {\usebeamerfont{title in head/foot}\insertshorttitle}% 插入标题
+      \hfill%
+      {\usebeamerfont{frame number}\usebeamercolor[fg]{frame number}\insertframenumber~\frameofframes~\inserttotalframenumber}% 插入当前页与总页数
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot} % 下分隔线
+    \end{beamercolorbox}
+  }
+\makeatother % 结束命令定义
+
+% 使用内部主题
+\useinnertheme{circles}
+
+% 定义 BUAA 颜色
+\xdefinecolor{buaa}{rgb}{0.149,0.403,0.635}  % BUAA 标志蓝色的 RGB 值
+\setbeamercolor{footline}{bg=buaa} % 设置页脚背景色
+\setbeamercolor{frametitle}{bg=buaa,fg=white} % 设置框架标题的背景色和前景色
+\setbeamercolor{title}{bg=buaa} % 设置标题的背景色
+\setbeamerfont{frametitle}{size=\large} % 设置框架标题的字体大小
+%\setbeamertemplate{navigation symbols}{} % 注释掉的导航符号模板
+\setbeamertemplate{bibliography item}[text] % 设置参考文献项目的模板
+\setbeamertemplate{caption}[numbered] % 设置图表标题为编号格式
+
+% 设置调色板的颜色
+\setbeamercolor{palette primary}{use=structure,fg=black,bg=white} % 主调色板
+\setbeamercolor{palette secondary}{use=structure,fg=black,bg=gray!20} % 次调色板
+\setbeamercolor{palette tertiary}{use=structure,fg=black,bg=gray!10} % 第三调色板
+\setbeamercolor{palette quaternary}{fg=black,bg=gray!5} % 第四调色板
+%\setbeamercolor*{sidebar}{use=structure,bg=structure.fg} % 注释掉的侧边栏颜色设置
+\setbeamercolor{titlelike}{parent=palette primary} % 标题样式继承主调色板
+
+% 尝试设置块标题的颜色
+\setbeamercolor{block title}{bg=gray!30,fg=black} % 块标题的背景色和前景色
+\setbeamercolor*{block title example}{use={normal text,example text},bg=white,fg=black} % 示例块标题的颜色
+\setbeamercolor{fine separation line}{} % 精细分隔线的颜色
+\setbeamercolor{item projected}{fg=black} % 投影项目的前景色
+\setbeamercolor{palette sidebar primary}{use=normal text,fg=normal text.fg} % 侧边栏主调色板
+\setbeamercolor{palette sidebar quaternary}{use=structure,fg=structure.fg} % 侧边栏第四调色板
+\setbeamercolor{palette sidebar secondary}{use=structure,fg=structure.fg} % 侧边栏第二调色板
+\setbeamercolor{palette sidebar tertiary}{use=normal text,fg=normal text.fg} % 侧边栏第三调色板
+%\setbeamercolor{palette sidebar quaternary}{fg=white} % 注释掉的侧边栏第四调色板
+\setbeamercolor{section in sidebar}{fg=black} % 侧边栏章节的前景色
+\setbeamercolor{section in sidebar shaded}{fg=gray} % 侧边栏章节阴影的前景色
+\setbeamercolor{separation line}{} % 分隔线的颜色
+\setbeamercolor{sidebar}{bg=white} % 侧边栏的背景色
+\setbeamercolor{sidebar}{parent=palette primary} % 侧边栏继承主调色板
+\setbeamercolor{structure}{fg=black} % 结构的前景色
+\setbeamercolor{subsection in sidebar}{fg=black} % 侧边栏子章节的前景色
+\setbeamercolor{subsection in sidebar shaded}{fg=gray} % 侧边栏子章节阴影的前景色
+
+% 在每个章节开始时插入目录页
+\AtBeginSection[]{
+	\begin{frame}
+		\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide] % 显示目录
+	\end{frame}
+}
+% 在每个子章节开始时插入目录页
+\AtBeginSubsection[]{
+	\begin{frame}
+		\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide] % 显示目录
+	\end{frame}
+}
+
+% 设置模式为所有模式
+\mode<all>
