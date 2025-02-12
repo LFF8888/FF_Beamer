@@ -1,2 +1,17 @@
 # FF_Beamer
- 
+
+背景图片回调
+
+
+
+
+
+![image-20250213001234553](README.assets/image-20250213001234553.png)
+
+![image-20250213000436639](README.assets/image-20250213000436639.png)
+
+![image-20250213000916215](README.assets/image-20250213000916215.png)
+
+![image-20250213001046334](README.assets/image-20250213001046334.png)
+
+![image-20250213002146812](README.assets/image-20250213002146812.png)
