@@ -8,10 +8,12 @@
 
 \usepackage{ff-beamer}
 
-
-
-
-
+% 在每一页右上角显示校徽（使用 TikZ 定位）
+\logo{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \node[anchor=north east,xshift=-0.2cm,yshift=-0.2cm] at (current page.north east){\includegraphics[height=1.5cm]{res/school_logo/henan-university.png}};
+  \end{tikzpicture}%
+}
 
 % 可选的其他主题定制：
 % \usecolortheme{seahorse}    % 颜色主题：seahorse、dolphin、whale 等

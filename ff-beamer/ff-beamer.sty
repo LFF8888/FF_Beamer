@@ -34,7 +34,7 @@
 %     \begin{tikzpicture}[remember picture, overlay] % 确保页脚在底层
 %       % 绘制页脚背景
 %       \fill[gray!20] (0, -1cm) rectangle (\paperwidth, -0.5cm);
-      
+%       
 %       % 在页脚中添加文本或图像
 %       \node[outer sep=0] at (\paperwidth/2, -0.75cm) {自定义页脚内容}; % 在此处添加页脚内容
 %     \end{tikzpicture}
@@ -44,6 +44,9 @@
 % % 自定义颜色主题
 \definecolor{customcolor}{RGB}{49, 94, 155} % 定义自定义颜色
 \setbeamercolor{item}{fg=customcolor} % 设置项目符号颜色
+
+% 自定义章节题目的颜色
+\setbeamercolor{section title}{fg=customcolor} % 设置章节标题前景色为自定义颜色
 
 % % 自定义字体主题
 % \setbeamerfont{title}{size=\Large, series=\bfseries, family=\rmfamily} % 自定义标题字体样式
