@@ -1,0 +1,233 @@
+% 主题设置
+\usetheme{Frankfurt} % 使用Frankfurt主题
+\usecolortheme{dolphin} % 使用dolphin颜色主题
+\useoutertheme[subsection=false]{miniframes} % 使用miniframes外部主题，不显示子章节
+\useinnertheme{circles} % 使用circles内部主题
+
+% 宏包引入
+\usepackage{hyperref} % 引入超链接宏包
+\usepackage{xcolor} % 引入颜色宏包
+\usepackage{color} % 引入颜色宏包（可能与xcolor重复）
+\usepackage{setspace} % 引入行间距设置宏包
+\usepackage{graphicx} % 引入图形插入宏包
+\usepackage{background} % 引入背景设置宏包
+
+\usepackage{algorithm} % 引入算法宏包
+\usepackage{algpseudocode} % 引入算法伪代码宏包
+\usepackage{shadowtext} % 引入阴影文本宏包
+\usepackage{stackengine} % 引入堆叠引擎宏包
+\usepackage{tikz} % 引入TikZ绘图宏包
+\usepackage{textpos} % 引入文本位置宏包
+\usepackage{listings} % 引入代码高亮宏包
+
+% 颜色定义
+\definecolor{codegreen}{rgb}{0,0.6,0} % 定义代码绿色
+\definecolor{codegray}{rgb}{0.5,0.5,0.5} % 定义代码灰色
+\definecolor{codepurple}{rgb}{0.58,0,0.82} % 定义代码紫色
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92} % 定义背景颜色
+
+% 其他颜色定义
+\definecolor{americanrose}{rgb}{1.0, 0.01, 0.24} % 定义美国玫瑰色
+\definecolor{arsenic}{rgb}{0.23, 0.27, 0.29} % 定义砷色
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66} % 定义空军蓝
+\definecolor{aqua}{rgb}{0.0, 1.0, 1.0} % 定义水色
+\definecolor{auburn}{rgb}{0.43, 0.21, 0.1} % 定义赤褐色
+\definecolor{bananayellow}{rgb}{1.0, 0.88, 0.21} % 定义香蕉黄
+\definecolor{aliceblue}{rgb}{0.94, 0.97, 1.0} % 定义爱丽丝蓝
+\definecolor{fluorescentorange}{rgb}{1.0, 0.75, 0.0} % 定义荧光橙
+\definecolor{brown(web)}{rgb}{0.65, 0.16, 0.16} % 定义网络棕色
+\definecolor{darkorchid}{rgb}{0.6, 0.2, 0.8} % 定义深紫兰色
+\definecolor{cyan(process)}{rgb}{0.0, 0.72, 0.92} % 定义青色（过程）
+\definecolor{darkbrown}{rgb}{0.4, 0.26, 0.13} % 定义深棕色
+\definecolor{aurometalsaurus}{rgb}{0.43, 0.5, 0.5} % 定义金属恐龙色
+\definecolor{splashedwhite}{rgb}{1.0, 0.99, 1.0} % 定义溅白色
+\definecolor{blue(ryb)}{rgb}{0.01, 0.28, 1.0} % 定义蓝色（RYB）
+\definecolor{blue(pigment)}{rgb}{0.2, 0.2, 0.6} % 定义颜料蓝
+\definecolor{darkpastelgreen}{rgb}{0.01, 0.75, 0.24} % 定义深粉绿色
+\definecolor{brightgreen}{rgb}{0.4, 1.0, 0.0} % 定义亮绿色
+\definecolor{brightube}{rgb}{0.82, 0.62, 0.91} % 定义亮紫色
+\definecolor{brilliantlavender}{rgb}{0.96, 0.73, 1.0} % 定义璀璨薰衣草色
+\definecolor{carminepink}{rgb}{0.92, 0.3, 0.26} % 定义卡尔米红色
+\definecolor{carminered}{rgb}{1.0, 0.0, 0.22} % 定义卡尔米红
+\definecolor{deeplilac}{rgb}{0.6, 0.33, 0.73} % 定义深紫丁香色
+\definecolor{deepmagenta}{rgb}{0.8, 0.0, 0.8} % 定义深紫红色
+\definecolor{saffron}{rgb}{0.96, 0.77, 0.19} % 定义藏红花色
+\definecolor{amethyst}{rgb}{0.6, 0.4, 0.8} % 定义紫水晶色
+\definecolor{byzantine}{rgb}{0.74, 0.2, 0.64} % 定义拜占庭色
+\definecolor{byzantium}{rgb}{0.44, 0.16, 0.39} % 定义拜占庭紫色
+\definecolor{harlequin}{rgb}{0.25, 1.0, 0.0} % 定义哈雷奎因色
+\definecolor{antiquefuchsia}{rgb}{0.57, 0.36, 0.51} % 定义古老紫红色
+\definecolor{auburn}{rgb}{0.43, 0.21, 0.1} % 定义赤褐色（重复定义）
+
+% 标题页设置
+\newcommand{\MakeTitle}{
+	\vspace{-1cm} % 上方间距
+
+\title{
+	\LARGE\sffamily% % 设置标题字体为无衬线
+	\def\primarycolor{blue!70!black}% % 定义主色
+	\def\secondarycolor{cyan!25}% % 定义次色
+	\def\shadowHoffset{1.9pt}% % 定义阴影水平偏移
+	\def\shadowVoffset{-1.9pt}% % 定义阴影垂直偏移
+	\Huge
+	\textbf{\shadowfy{\Title}} % 设置标题内容并应用阴影效果
+}
+\subtitle{
+	\Large
+	\vspace{0.5cm} % 副标题上方间距
+	\color{arsenic}\textbf{	\underline{\Subtitle}} % 设置副标题内容并加下划线
+	\vspace{-1cm}} % 副标题下方间距
+\institute{
+	\small  \ \LARGE\sffamily% % 设置机构字体为无衬线
+	\def\primarycolor{auburn!70!auburn}% % 定义主色
+	\def\secondarycolor{amethyst!55}% % 定义次色
+	\def\shadowHoffset{.5pt}% % 定义阴影水平偏移
+	\def\shadowVoffset{-.8pt}% % 定义阴影垂直偏移
+	\large
+	\shadowfy{ \Institute}\\ % 设置机构名称并应用阴影效果
+	\shadowfy{ \InstituteAddress} % 设置机构地址并应用阴影效果
+	\newline
+}
+\maketitle % 生成标题页
+\vspace{-1.5cm} % 标题页下方间距
+\large{
+	\begin{columns} % 开始列环境
+
+		\column{0.3\textwidth} % 第一列宽度
+
+		\color{black}\textbf{Submitted By :} \\ % 提交人标签
+		\hspace{2mm}\SubmittedBy % 提交人姓名
+
+		\column{0.36\textwidth} % 第二列宽度
+		\color{black} \textbf{Submitted To : }\\ % 提交对象标签
+		\hspace{2mm}\SubmittedTo % 提交对象姓名
+	\end{columns} % 结束列环境
+}
+}
+
+% 进度条设置
+\newcommand{\progressbar}{
+	\pgfmathsetmacro{\theta}{360/\inserttotalframenumber*\insertframenumber} % 计算当前帧的角度
+	\begin{tikzpicture}[scale=0.05] % 开始TikZ绘图
+		\fill[yellow] (0,0) circle (9); % 绘制黄色圆圈
+		\fill[red] (0,0) -- (9,0) arc (0:-\theta:9); % 绘制红色进度部分
+		\fill[white] (0,0) circle (5); % 绘制白色圆圈
+		\node at (0,0) {\insertframenumber}; % 在中心显示当前帧编号
+	\end{tikzpicture} % 结束TikZ绘图
+}
+
+% 页脚设置
+\setbeamertemplate{footline}	{
+	\hbox{ % 开始水平盒子
+		\begin{beamercolorbox}[wd=4cm,ht=7.8pt,dp=3pt,center]{title in head/foot}\insertsection % 显示当前章节
+		\end{beamercolorbox}%
+		\begin{beamercolorbox}[wd=7.5cm,ht=7.8pt,dp=3pt,center]{author in head/foot}Graphs % 显示作者信息
+		\end{beamercolorbox}%
+		\hfill \progressbar % 显示进度条
+	}
+}
+\setbeamertemplate{arrow symbols}{} % 清除箭头符号
+\setbeamertemplate{navigation symbols}{} % 清除导航符号
+
+% 帧标题设置
+\setbeamertemplate{frametitle}[default][left,leftskip = 10mm] % 设置帧标题格式
+\newcounter{cont} % 创建计数器
+\makeatletter % 开始定义新命令
+
+% 允许帧标题的续集编号
+\setbeamertemplate{frametitle continuation}{%
+	\setcounter{cont}{\beamer@endpageofframe}% % 设置计数器为当前帧结束页
+	\addtocounter{cont}{1}% % 计数器加1
+	\addtocounter{cont}{-\beamer@startpageofframe}% % 计数器减去当前帧开始页
+	\small(\insertcontinuationcount/\arabic{cont})% % 显示续集编号
+}
+\makeatother % 结束命令定义
+
+% 背景图片设置
+\setbeamertemplate{background}
+{
+\begin{tikzpicture}[remember picture, overlay] % 开始TikZ绘图
+	\node[opacity = 0.06] at (current page.center) % 设置背景图片透明度
+	{
+		\includegraphics[width = \paperwidth,height = \paperwidth]{\ImageUrl} % 插入背景图片
+	};
+\end{tikzpicture} % 结束TikZ绘图
+}
+
+% 阴影效果命令定义
+\newcommand\shadowfy[1]{\expandafter\shadowfypars#1\par\relax\relax}
+\long\def\shadowfypars#1\par#2\relax{%
+\ifx#1\relax\else
+\shadowfywords#1 \relax\relax% % 处理单词
+\fi%
+\ifx\relax#2\else\par\shadowfypars#2\relax\fi%
+}
+\def\shadowfywords#1 #2\relax{%
+\ifx#1\relax\else
+\shadowfyletters#1\relax\relax% % 处理字母
+\fi%
+\ifx\relax#2\else\ \shadowfywords#2\relax\fi%
+}
+\def\shadowfyletters#1#2\relax{%
+\shadow{#1}% % 应用阴影效果
+\ifx\relax#2\else\shadowfyletters#2\relax\fi}
+
+\newlength\shadowHoffset % 定义阴影水平偏移长度
+\newlength\shadowVoffset % 定义阴影垂直偏移长度
+\setlength\shadowHoffset{.3pt} % 设置阴影水平偏移
+\setlength\shadowVoffset{-.2pt} % 设置阴影垂直偏移
+\def\primarycolor{white} % 定义主色为白色
+\def\secondarycolor{black} % 定义次色为黑色
+
+% 定义阴影效果
+\def\shadow#1{\kern\shadowHoffset%
+\raisebox{\shadowVoffset}{%
+	\stackinset{c}{-\shadowHoffset}{c}{-\shadowVoffset}%
+	{\textcolor{\primarycolor}{#1}}{\textcolor{\secondarycolor}{#1}}}%
+\kern-\shadowHoffset}
+
+\usepackage[most]{tcolorbox} % 引入tcolorbox宏包以创建盒子
+
+% 定义最简设计的盒子
+\newtcolorbox{tbee}[3][] 
+{
+	enhanced,attach boxed title to top left={xshift=4mm,yshift=-3mm,yshifttext=-1mm}, % 设置标题位置
+	colback=white, % 背景颜色为白色
+	colframe=#3, % 盒子边框颜色
+	colbacktitle=#3, % 盒子标题背景颜色
+	coltitle=#2, % 盒子标题颜色
+	arc=4mm,boxrule=2pt, % 设置圆角和边框宽度
+	title= #1, % 盒子标题
+	fonttitle = \fontfamily{qag}\selectfont\large\bfseries, % 设置标题字体
+	halign=flush left, % 标题左对齐
+	boxed title style={size=small,colframe=white,arc=2mm} % 设置标题盒子样式
+}
+\newtcolorbox{rtbee}[3][left] % 定义右上角最简设计的盒子
+{
+	enhanced,attach boxed title to top right={xshift=-4mm,yshift=-3mm,yshifttext=-1mm}, % 设置标题位置
+	colback=white, % 背景颜色为白色
+	colframe=#3, % 盒子边框颜色
+	colbacktitle=#3, % 盒子标题背景颜色
+	coltitle=#2, % 盒子标题颜色
+	arc=4mm,boxrule=2pt, % 设置圆角和边框宽度
+	% width = 5cm, % 可选：设置盒子宽度
+	title= #1, % 盒子标题
+	fonttitle = \fontfamily{qag}\selectfont\large\bfseries, % 设置标题字体
+	halign=flush left, % 标题左对齐
+	boxed title style={size=small,colframe=white,arc=2mm} % 设置标题盒子样式
+}
+
+% 定义环境bee
+\newenvironment{bee}[3][]{
+	\begin{tbee}[#1]{#2}{#3} % 开始tbee环境
+}
+{
+	\end{tbee} % 结束tbee环境
+}
+% 定义环境Rbee
+\newenvironment{Rbee}[3][]{
+	\begin{rtbee}[#1]{#2}{#3} % 开始rtbee环境
+}
+{
+	\end{rtbee} % 结束rtbee环境
+}

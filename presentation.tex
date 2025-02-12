@@ -1,0 +1,259 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{xeCJK}
+\setCJKmainfont{OPPO Sans} % 设置为Mac电脑最常见的字体
+
+% =================== 主题设置 ====================
+% 选择主题：Madrid。你也可以尝试其他主题如 Copenhagen、Berlin 等。
+\usetheme{Madrid}
+
+% 可选的其他主题定制：
+% \usecolortheme{seahorse}    % 颜色主题：seahorse、dolphin、whale 等
+% \usefonttheme{professionalfonts}  % 字体主题
+% \useinnertheme{circles}     % 内部元素主题（如列表符号样式）
+% \useoutertheme{infolines}   % 外部模板，控制页眉页脚等布局
+
+% =================== 文档信息 ====================
+\title{Beamer 全面语法讲解}         % 演示文稿标题
+\subtitle{详细介绍 Beamer 的各种语法与功能} % 副标题，可选
+\author{张三 \& 李四}               % 作者，可以写多个名字
+\institute{某某大学 \\ 某某研究所}    % 所属机构，可以换成你所在的单位或学校
+\date{\today}                   % 使用系统当前日期
+
+% =================== 引用宏包 ====================
+% 引入插入图片、数学公式、绘图等常用宏包
+\usepackage{graphicx}     % 用于插入图片
+\usepackage{amsmath, amssymb}  % 用于数学公式排版
+\usepackage{tikz}         % 用于绘制流程图、示意图等
+\usetikzlibrary{positioning} % 加载定位库以支持 below=of 语法
+% 根据需要还可以加载其他宏包，比如 listings（代码显示）、xcolor（颜色支持）等
+
+\begin{document}
+
+% ================ 标题页 ======================
+\begin{frame}
+    \titlepage  
+    % 利用 \titlepage 命令自动生成标题页，展示标题、作者、机构和日期等信息
+\end{frame}
+
+% ================ 目录页 ======================
+\begin{frame}
+    \frametitle{目录}
+    % 自动生成目录：依据下面的 \section 与 \subsection 自动构建目录
+    \tableofcontents
+\end{frame}
+
+% ================ 第一部分：Beamer 基础简介 ======================
+\section{Beamer 基础简介}
+\begin{frame}
+    \frametitle{什么是 Beamer？}
+    % Beamer 是一个基于 LaTeX 的演示文稿系统，其特点包括：
+    \begin{itemize}
+        \item 高质量的排版，尤其适合排版数学公式与复杂图表
+        \item 丰富的主题与模板，可以定制化演示文稿外观
+        \item 支持动画与动态效果，让讲解更富有节奏感
+        \item 易于集成代码、图片和表格等内容
+    \end{itemize}
+\end{frame}
+
+% ================ 第二部分：列表与动画效果 ======================
+\section{列表与动画效果}
+\begin{frame}
+    \frametitle{项目符号列表示例}
+    % 使用 itemize 环境生成无序列表，现一次性显示全部内容
+    \begin{itemize}
+        \item 第一要点
+        \item 第二要点
+        \item 第三要点
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{有序列表示例}
+    % 使用 enumerate 环境生成有序列表，现一次性显示全部内容
+    \begin{enumerate}
+        \item 第一项
+        \item 第二项
+        \item 第三项
+    \end{enumerate}
+\end{frame}
+
+% ================ 第三部分：Block 环境的使用 ======================
+\section{Block 环境的使用}
+\begin{frame}
+    \frametitle{Block 环境介绍}
+    % Block 环境用于突出显示某一段重要信息或分块内容
+    \begin{block}{普通 Block}
+        这是一个普通的 Block，用于解释某个概念或提供说明文字。
+    \end{block}
+    
+    \begin{alertblock}{警告 Block}
+        这是一个警告 Block，适用于强调注意和错误提示信息。
+    \end{alertblock}
+    
+    \begin{exampleblock}{示例 Block}
+        这是一个示例 Block，用来展示具体的例子或案例分析。
+    \end{exampleblock}
+\end{frame}
+
+% ================ 第四部分：数学公式与自定义命令 ======================
+\section{数学公式与自定义命令}
+\begin{frame}
+    \frametitle{数学公式示例}
+    % 行内公式示例：使用美元符号包裹公式内容
+    爱因斯坦质能关系： $E = mc^2$。
+    % 独立公式：使用 display math 环境展示更复杂的公式
+    \[
+    \sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+    \]
+    % 定义自定义命令：下面定义一个表示复数集的命令，并在公式中使用
+    \newcommand{\Real}{\mathbb{R}}
+    这里定义了实数集合：$\Real$。
+\end{frame}
+
+% ================ 第五部分：多栏布局示例 ======================
+\section{多栏布局示例}
+\begin{frame}
+    \frametitle{两栏布局示例}
+    % 使用 columns 环境生成多栏排版，使得内容可以左右分栏显示
+    \begin{columns}[T] % [T] 表示顶部对齐
+        \column{0.48\textwidth}
+            % 左栏内容：展示列表
+            \textbf{左栏：}
+            \begin{itemize}
+                \item 条目 1
+                \item 条目 2
+                \item 条目 3
+            \end{itemize}
+        \column{0.48\textwidth}
+            % 右栏内容：插入图片展示
+            \textbf{右栏：}
+            \begin{figure}
+                \includegraphics[width=\textwidth]{example-image} % 请替换为正确的图片文件名
+                \caption{示例图片}
+            \end{figure}
+    \end{columns}
+\end{frame}
+
+% ================ 第六部分：图片与表格 ======================
+\section{图片与表格}
+\begin{frame}
+    \frametitle{插入图片示例}
+    % 插入图片的基本用法，与标准 LaTeX 用法一致
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{example-image}
+        \caption{这是一个示例图片}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{插入表格示例}
+    % 使用 tabular 环境插入简单表格，注意定义列格式和表格线条
+    \begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        列 1 & 列 2 & 列 3 \\
+        \hline
+        数据 A & 数据 B & 数据 C \\
+        \hline
+        数据 D & 数据 E & 数据 F \\
+        \hline
+    \end{tabular}
+    \end{center}
+\end{frame}
+
+% ================ 第七部分：动态效果与动画 ======================
+\section{动态效果与动画}
+\begin{frame}[fragile]
+    \frametitle{动态效果与 Overlay}
+    % 下面的列表直接显示全部内容：
+    \begin{itemize}
+        \item 动画第一步
+        \item 动画第二步
+        \item 动画第三步
+    \end{itemize}
+    此外，可使用 \verb|\only|、\verb|\visible|、\verb|\invisible| 等命令精细控制内容显示。
+\end{frame}
+
+% ================ 第八部分：使用 TikZ 绘图 ======================
+\section{使用 TikZ 绘图}
+\begin{frame}
+    \frametitle{TikZ 绘图示例}
+    % 使用 TikZ 宏包绘制简单流程图
+    \begin{tikzpicture}[node distance=1.5cm, auto]
+        % 定义节点
+        \node[draw, rectangle] (start) {开始};
+        \node[draw, rectangle, below=of start] (process) {处理过程};
+        \node[draw, rectangle, below=of process] (end) {结束};
+        % 连接节点：使用箭头连接
+        \draw[->] (start) -- (process);
+        \draw[->] (process) -- (end);
+    \end{tikzpicture}
+\end{frame}
+
+% ================ 第九部分：定制页眉页脚 ======================
+\section{定制页眉页脚}
+\begin{frame}[fragile]
+    \frametitle{自定义页眉页脚示例}
+    % 利用 \setbeamertemplate 自定义页脚，这里将作者、日期和页码显示在页面底部
+    \setbeamertemplate{footline}{
+        \leavevmode%
+        \hbox{%
+            \begin{beamercolorbox}[wd=0.5\paperwidth,ht=2.5ex,dp=1ex,center]{author in head/foot}%
+                \usebeamerfont{author in head/foot}\insertshortauthor
+            \end{beamercolorbox}%
+            \begin{beamercolorbox}[wd=0.5\paperwidth,ht=2.5ex,dp=1ex,center]{date in head/foot}%
+                \usebeamerfont{date in head/foot}\insertshortdate\,\insertframenumber{} / \inserttotalframenumber
+            \end{beamercolorbox}%
+        }
+    }
+    % 注意：自定义页眉页脚的设置可以放在导言区，或者在需要时局部修改
+\end{frame}
+
+% ================ 第十部分：高级定制 ======================
+\section{高级定制}
+\begin{frame}[fragile]
+    \frametitle{修改标题页模板示例}
+    % 通过 \setbeamertemplate 自定义标题页的布局
+    \setbeamertemplate{title page}{
+        \vbox{}
+        \vfill
+        \begin{center}
+            {\usebeamerfont{title}\inserttitle\par}
+            \vskip0.5em
+            {\usebeamerfont{subtitle}\insertsubtitle\par}
+            \vskip1em
+            {\usebeamerfont{author}\insertauthor\par}
+            \vskip1em
+            {\usebeamerfont{institute}\insertinstitute\par}
+            \vskip1em
+            {\usebeamerfont{date}\insertdate\par}
+        \end{center}
+        \vfill
+    }
+    % 调用 \titlepage 命令后即可显示自定义的标题页
+    此处展示了如何自定义标题页，使其样式和排版满足个性化需求。
+\end{frame}
+
+% ================ 第十一部分：参考文献 ======================
+\section{参考文献}
+\begin{frame}[allowframebreaks]
+    \frametitle{参考文献示例}
+    % 如果你使用 BibTeX 或 BibLaTeX 管理参考文献，可在这里插入相应代码
+    % 示例（需要准备 references.bib 文件）：
+    % \bibliographystyle{plain}
+    % \bibliography{references}
+    %
+    % allowframebreaks 允许内容在多个页面上分割显示
+    这里是参考文献部分，实际使用时请根据你的文献数据库进行配置。
+\end{frame}
+
+% ================ 第十二部分：结束页 ======================
+\section{结束}
+\begin{frame}
+    \frametitle{感谢聆听}
+    % 演示文稿的最后一个页面，用于致谢或者总结
+    感谢大家的聆听！欢迎提问讨论！
+\end{frame}
+
+\end{document}

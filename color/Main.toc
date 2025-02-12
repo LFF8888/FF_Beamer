@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{图的类型}{1}{0}{1}
+\beamer@sectionintoc {2}{介绍}{6}{0}{2}

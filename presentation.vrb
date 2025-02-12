@@ -1,0 +1,20 @@
+\frametitle{修改标题页模板示例}
+    % 通过 \setbeamertemplate 自定义标题页的布局
+    \setbeamertemplate{title page}{
+        \vbox{}
+        \vfill
+        \begin{center}
+            {\usebeamerfont{title}\inserttitle\par}
+            \vskip0.5em
+            {\usebeamerfont{subtitle}\insertsubtitle\par}
+            \vskip1em
+            {\usebeamerfont{author}\insertauthor\par}
+            \vskip1em
+            {\usebeamerfont{institute}\insertinstitute\par}
+            \vskip1em
+            {\usebeamerfont{date}\insertdate\par}
+        \end{center}
+        \vfill
+    }
+    % 调用 \titlepage 命令后即可显示自定义的标题页
+    此处展示了如何自定义标题页，使其样式和排版满足个性化需求。
