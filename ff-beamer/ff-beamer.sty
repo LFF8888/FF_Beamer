@@ -1,52 +1,180 @@
-% ff-beamer.sty
-% 引入tikz包以绘制图形
-\usepackage{tikz}
+% 版权所有 2009 by Pim Vullers
+%
+% 本文件可以被分发和/或修改
+%
+% 1. 根据 LaTeX 项目公共许可证和/或
+% 2. 根据 GNU 公共许可证。
 
-% 定义背景图像
-\defbeamertemplate*{background}{custom background}{
+%%%
+%%% 从现有主题继承定义（请勿修改这些）
+%%%
+
+% 外部元素的布局方案：分割头部和底部
+\useoutertheme{split}
+
+% 外部元素的颜色方案：使用背景颜色
+\usecolortheme{whale}
+
+% 内部元素的布局方案：圆角元素
+\useinnertheme{rounded}
+
+% 内部元素的颜色方案：使用前景颜色
+\usecolortheme{orchid}
+
+
+%%%
+%%% 调整内部主题的定义以匹配个人偏好（可以修改这些）
+%%%
+
+% 列表项：默认（三角形）、圆形、方形、球形
+\setbeamertemplate{itemize items}[circle]
+
+% 枚举项：默认、圆形、方形、球形
+\setbeamertemplate{enumerate items}[circle]
+
+% 大纲：默认，章节编号，子章节编号，圆形，方形，球形，无编号球形
+\setbeamertemplate{sections/subsections in toc}[default]
+
+% 一般块：
+\setbeamertemplate{blocks}[rounded]
+
+% 标题页：
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+
+% 部分页：
+\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true]
+
+% 导航符号：
+% \setbeamertemplate{navigation symbols}{}
+
+
+%%%
+%%% 调整外部主题的定义以匹配 Radboud（网站）样式
+%%%
+
+% 背景：偏移x轴 -3cm，保留图片原比例，透明度0.1
+\pgfdeclareimage[height=0.8\paperheight]{bg}{res/school_logo/henan-university.png}
+\setbeamertemplate{background}{
   \begin{tikzpicture}[remember picture, overlay]
-    \node[outer sep=0] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{res/background_blue2pink.png}}; % 使用指定的背景图像并居中
+      \node[opacity=0.05] at ([xshift=6.4cm, yshift=-0.4cm]current page.center) {\pgfuseimage{bg}};
   \end{tikzpicture}
 }
 
-% 使用自定义背景样式
-\setbeamertemplate{background}[custom background]
+% 颜色
+%\usecolortheme[RGB={182,11,45}]{structure}
+\usecolortheme[RGB={0,63,136}]{structure}
 
-% 定义标题栏背景
-\defbeamertemplate*{headline}{custom title bar}{
-  \leavevmode
-  \hbox{%
-    \begin{tikzpicture}[remember picture, overlay] % 确保标题栏在顶层
-      % 绘制白色标题栏底部区域
-      \fill[white] (0, 1cm) rectangle (\paperwidth, 0cm);
-      
-      % 使用蓝到绿再到蓝的渐变图像作为标题栏下边缘装饰
-      \node[outer sep=0] at (\paperwidth/2, 0) {\includegraphics[width=\paperwidth]{res/blue2green2blue.png}};
-    \end{tikzpicture}
-  }
-  \vskip -1cm % 调整标题栏高度
+% 设置框架标题的颜色，继承自头部/底部的子章节
+\setbeamercolor{frametitle}{parent=subsection in head/foot}
+% 设置框架标题右侧的颜色，继承自头部/底部的章节
+\setbeamercolor{frametitle right}{parent=section in head/foot}
+
+% 声明水平渐变，用于框架标题的背景
+\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+  color(0pt)=(frametitle.bg);
+  color(\paperwidth)=(frametitle right.bg)}
+
+% 在文档开始时执行的命令
+\AtBeginDocument{
+  % 声明垂直渐变，用于框架顶部的背景
+  \pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{%
+    color(0pt)=(bg);
+    color(4pt)=(black!50!bg)}
 }
 
-% % 自定义页脚
-% \defbeamertemplate*{footline}{custom footer}{
-%   \leavevmode
-%   \hbox{%
-%     \begin{tikzpicture}[remember picture, overlay] % 确保页脚在底层
-%       % 绘制页脚背景
-%       \fill[gray!20] (0, -1cm) rectangle (\paperwidth, -0.5cm);
-%       
-%       % 在页脚中添加文本或图像
-%       \node[outer sep=0] at (\paperwidth/2, -0.75cm) {自定义页脚内容}; % 在此处添加页脚内容
-%     \end{tikzpicture}
-%   }
-% }
+% 底部线：作者 | 标题 | 日期 | 幻灯片编号
 
-% % 自定义颜色主题
-\definecolor{customcolor}{RGB}{49, 94, 155} % 定义自定义颜色
-\setbeamercolor{item}{fg=customcolor} % 设置项目符号颜色
+\defbeamertemplate*{footline}{zju theme}{%
+  \leavevmode%
+  \hbox{%
+    % 创建一个颜色框，宽度为25%的纸宽，用于显示作者
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\insertshortauthor
+    \end{beamercolorbox}%
+    % 创建一个颜色框，宽度为25%的纸宽，用于显示日期
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\insertshortdate
+    \end{beamercolorbox}%
+    % 创建一个颜色框，宽度为43.5%的纸宽，用于显示标题
+    \begin{beamercolorbox}[wd=.435\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    % 创建一个颜色框，宽度为6.5%的纸宽，用于显示幻灯片编号
+    \begin{beamercolorbox}[wd=0.065\paperwidth,ht=2.25ex,dp=1ex,right]{title in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
 
-% 自定义章节题目的颜色
-\setbeamercolor{section title}{fg=customcolor} % 设置章节标题前景色为自定义颜色
+% 定义标题行的模板
+\defbeamertemplate*{headline}{zju theme}{%
+  \leavevmode%
+  \@tempdimb=6.4375ex%
+  %\multiply\@tempdimb by\beamer@sectionmax%
+  % 声明图像，用于显示logo
+  \pgfdeclareimage[height=.95\@tempdimb]{logo}{res/zju_logo.png}%
+  \pgfdeclareimage[height=1.\@tempdimb]{title_logo}{res/zju_title.png}%
+  \logo{\pgfuseimage{logo}}%
+  \ifdim\@tempdimb>0pt%
+    \advance\@tempdimb by 1.125ex%
+    % 创建一个颜色框，宽度为80%的纸宽，用于显示章节导航
+    \begin{beamercolorbox}[wd=.8\paperwidth,ht=\@tempdimb]{section in head/foot}%
+      \vbox to\@tempdimb{\vfil\insertsectionnavigationhorizontal{.5\textwidth}{\hskip0pt plus1filll}{}\vfil}%
+    \end{beamercolorbox}%
+    %% \begin{beamercolorbox}[wd=.4\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
+    %%   \vbox to\@tempdimb{\vfil\textbf{\footnotesize\insertshortinstitute~~}\vfil}%
+    %% \end{beamercolorbox}%
+    % 创建一个颜色框，宽度为13.5%的纸宽，用于显示标题logo
+    \begin{beamercolorbox}[wd=.135\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\pgfuseimage{title_logo}\vfil}%
+    \end{beamercolorbox}%
+    % 创建一个颜色框，宽度为6.5%的纸宽，用于显示默认logo
+    \begin{beamercolorbox}[wd=.065\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
+      \vbox to\@tempdimb{\vfil\insertlogo\vfil\vfil}%
+    \end{beamercolorbox}%
+  \fi%
+}
 
-% % 自定义字体主题
-% \setbeamerfont{title}{size=\Large, series=\bfseries, family=\rmfamily} % 自定义标题字体样式
+% 定义框架标题的模板
+\defbeamertemplate*{frametitle}{zju theme}{%
+  \nointerlineskip% % 不插入行间距
+  %\vskip-2pt% % 可选：调整标题与上方内容的间距
+  \hbox{\leavevmode % 创建一个水平盒子
+    \advance\beamer@leftmargin by -12bp% % 向左移动边距
+    \advance\beamer@rightmargin by -12bp% % 向右移动边距
+    \beamer@tempdim=\textwidth% % 将临时变量设置为文本宽度
+    \advance\beamer@tempdim by \beamer@leftmargin% % 加上左边距
+    \advance\beamer@tempdim by \beamer@rightmargin% % 加上右边距
+    \hskip-\Gm@lmargin\hbox{% % 向左移动边距并创建一个新的水平盒子
+      \setbox\beamer@tempbox=\hbox{\begin{minipage}[b]{\paperwidth}% % 创建一个最小宽度为纸宽的盒子
+          \vbox{}\vskip-.75ex% % 垂直盒子，调整上方间距
+          \leftskip0.3cm% % 设置左侧缩进
+          \rightskip0.3cm plus1fil\leavevmode % 设置右侧缩进并允许扩展
+          \insertframetitle% % 插入框架标题
+          \ifx\insertframesubtitle\@empty% % 检查是否有副标题
+            \strut\par% % 如果没有副标题，插入一个空段落
+          \else
+            \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}% % 如果有副标题，插入副标题
+          \fi%
+          \nointerlineskip% % 不插入行间距
+          \vbox{}% % 创建一个空的垂直盒子
+        \end{minipage}}% % 结束最小宽度盒子
+      \beamer@tempdim=\ht\beamer@tempbox% % 获取临时盒子的高度
+      \advance\beamer@tempdim by 2pt% % 增加2pt的高度
+      % 创建一个pgf图形，用于框架标题的背景
+      \begin{pgfpicture}{0.1mm}{0pt}{1.01\paperwidth}{\beamer@tempdim} % 创建一个pgf图形
+        \usebeamercolor{frametitle right} % 使用框架标题右侧的颜色
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}} % 定义矩形路径
+        \pgfusepath{clip} % 使用路径进行剪切
+        \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}} % 插入渐变背景
+      \end{pgfpicture} % 结束pgf图形
+      \hskip-\paperwidth% % 向左移动纸宽
+      \box\beamer@tempbox% % 插入临时盒子
+    }%
+    \hskip-\Gm@rmargin% % 向右移动边距
+  }%
+  %  \nointerlineskip % 不插入行间距
+  %    \vskip-0.2pt % 可选：调整标题与下方内容的间距
+  %    \hbox to\textwidth{\hskip-\Gm@lmargin\pgfuseshading{beamer@topshade}\hskip-\Gm@rmargin} % 可选：创建一个水平盒子并插入渐变背景
+  %    \vskip-2pt % 可选：调整间距
+}

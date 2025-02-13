@@ -1,0 +1,52 @@
+% ff-beamer.sty
+% 引入tikz包以绘制图形
+\usepackage{tikz}
+
+% 定义背景图像
+\defbeamertemplate*{background}{custom background}{
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[outer sep=0] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{res/background_blue2pink.png}}; % 使用指定的背景图像并居中
+  \end{tikzpicture}
+}
+
+% 使用自定义背景样式
+\setbeamertemplate{background}[custom background]
+
+% 定义标题栏背景
+\defbeamertemplate*{headline}{custom title bar}{
+  \leavevmode
+  \hbox{%
+    \begin{tikzpicture}[remember picture, overlay] % 确保标题栏在顶层
+      % 绘制白色标题栏底部区域
+      \fill[white] (0, 1cm) rectangle (\paperwidth, 0cm);
+      
+      % 使用蓝到绿再到蓝的渐变图像作为标题栏下边缘装饰
+      \node[outer sep=0] at (\paperwidth/2, 0) {\includegraphics[width=\paperwidth]{res/blue2green2blue.png}};
+    \end{tikzpicture}
+  }
+  \vskip -1cm % 调整标题栏高度
+}
+
+% % 自定义页脚
+% \defbeamertemplate*{footline}{custom footer}{
+%   \leavevmode
+%   \hbox{%
+%     \begin{tikzpicture}[remember picture, overlay] % 确保页脚在底层
+%       % 绘制页脚背景
+%       \fill[gray!20] (0, -1cm) rectangle (\paperwidth, -0.5cm);
+%       
+%       % 在页脚中添加文本或图像
+%       \node[outer sep=0] at (\paperwidth/2, -0.75cm) {自定义页脚内容}; % 在此处添加页脚内容
+%     \end{tikzpicture}
+%   }
+% }
+
+% % 自定义颜色主题
+\definecolor{customcolor}{RGB}{49, 94, 155} % 定义自定义颜色
+\setbeamercolor{item}{fg=customcolor} % 设置项目符号颜色
+
+% 自定义章节题目的颜色
+\setbeamercolor{section title}{fg=customcolor} % 设置章节标题前景色为自定义颜色
+
+% % 自定义字体主题
+% \setbeamerfont{title}{size=\Large, series=\bfseries, family=\rmfamily} % 自定义标题字体样式
