@@ -1,14 +1,8 @@
-% 版权所有 2009 by Pim Vullers
-%
-% 本文件可以被分发和/或修改
-%
-% 1. 根据 LaTeX 项目公共许可证和/或
-% 2. 根据 GNU 公共许可证。
+% ======================================== 包的调用 ========================================
+\usepackage{tikz}
+\usetikzlibrary{calc}
 
-%%%
-%%% 从现有主题继承定义（请勿修改这些）
-%%%
-
+% ======================================== 主题设置 ========================================
 % 外部元素的布局方案：分割头部和底部
 \useoutertheme{split}
 
@@ -22,9 +16,8 @@
 \usecolortheme{orchid}
 
 
-%%%
+% ======================================== 内部主题调整 ========================================
 %%% 调整内部主题的定义以匹配个人偏好（可以修改这些）
-%%%
 
 % 列表项：默认（三角形）、圆形、方形、球形
 \setbeamertemplate{itemize items}[circle]
@@ -44,47 +37,19 @@
 % 部分页：
 \setbeamertemplate{part page}[default][colsep=-4bp,rounded=true]
 
-% 导航符号：
-% \setbeamertemplate{navigation symbols}{}
 
+% ======================================== 颜色设置 ========================================
+% % 在文档开始时执行的命令
+% \AtBeginDocument{
+%   % 声明垂直渐变，用于框架顶部的背景
+%   \pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{%
+%     color(0pt)=(bg);
+%     color(4pt)=(pink!50!bg)}
+% }
 
-%%%
-%%% 调整外部主题的定义以匹配 Radboud（网站）样式
-%%%
-
-% 背景：偏移x轴 -3cm，保留图片原比例，透明度0.1
-\pgfdeclareimage[height=0.8\paperheight]{bg}{res/school_logo/henan-university.png}
-\setbeamertemplate{background}{
-  \begin{tikzpicture}[remember picture, overlay]
-      \node[opacity=0.05] at ([xshift=6.4cm, yshift=-0.4cm]current page.center) {\pgfuseimage{bg}};
-  \end{tikzpicture}
-}
-
-% 颜色
-%\usecolortheme[RGB={182,11,45}]{structure}
-\usecolortheme[RGB={0,63,136}]{structure}
-
-% 设置框架标题的颜色，继承自头部/底部的子章节
-\setbeamercolor{frametitle}{parent=subsection in head/foot}
-% 设置框架标题右侧的颜色，继承自头部/底部的章节
-\setbeamercolor{frametitle right}{parent=section in head/foot}
-
-% 声明水平渐变，用于框架标题的背景
-\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
-  color(0pt)=(frametitle.bg);
-  color(\paperwidth)=(frametitle right.bg)}
-
-% 在文档开始时执行的命令
-\AtBeginDocument{
-  % 声明垂直渐变，用于框架顶部的背景
-  \pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{%
-    color(0pt)=(bg);
-    color(4pt)=(black!50!bg)}
-}
-
+% ======================================== 底部线设置 ========================================
 % 底部线：作者 | 标题 | 日期 | 幻灯片编号
-
-\defbeamertemplate*{footline}{zju theme}{%
+\defbeamertemplate*{footline}{ffbeamer theme}{%
   \leavevmode%
   \hbox{%
     % 创建一个颜色框，宽度为25%的纸宽，用于显示作者
@@ -106,75 +71,108 @@
   \vskip0pt%
 }
 
-% 定义标题行的模板
-\defbeamertemplate*{headline}{zju theme}{%
-  \leavevmode%
-  \@tempdimb=6.4375ex%
-  %\multiply\@tempdimb by\beamer@sectionmax%
-  % 声明图像，用于显示logo
-  \pgfdeclareimage[height=.95\@tempdimb]{logo}{res/zju_logo.png}%
-  \pgfdeclareimage[height=1.\@tempdimb]{title_logo}{res/zju_title.png}%
-  \logo{\pgfuseimage{logo}}%
+
+% ======================================== 标题行设置 ========================================
+\defbeamertemplate*{headline}{ffbeamer theme}{
+  \leavevmode% % 确保正确进入水平模式
+  \@tempdimb=3.5ex% % 标题栏基础高度
+  
   \ifdim\@tempdimb>0pt%
-    \advance\@tempdimb by 1.125ex%
-    % 创建一个颜色框，宽度为80%的纸宽，用于显示章节导航
-    \begin{beamercolorbox}[wd=.8\paperwidth,ht=\@tempdimb]{section in head/foot}%
-      \vbox to\@tempdimb{\vfil\insertsectionnavigationhorizontal{.5\textwidth}{\hskip0pt plus1filll}{}\vfil}%
-    \end{beamercolorbox}%
-    %% \begin{beamercolorbox}[wd=.4\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
-    %%   \vbox to\@tempdimb{\vfil\textbf{\footnotesize\insertshortinstitute~~}\vfil}%
-    %% \end{beamercolorbox}%
-    % 创建一个颜色框，宽度为13.5%的纸宽，用于显示标题logo
-    \begin{beamercolorbox}[wd=.135\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
-      \vbox to\@tempdimb{\vfil\pgfuseimage{title_logo}\vfil}%
-    \end{beamercolorbox}%
-    % 创建一个颜色框，宽度为6.5%的纸宽，用于显示默认logo
-    \begin{beamercolorbox}[wd=.065\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
-      \vbox to\@tempdimb{\vfil\insertlogo\vfil\vfil}%
+    % 修正1：去除表达式直接指定数值高度
+    \begin{beamercolorbox}[wd=\paperwidth,ht=6ex,dp=0ex]{section in head/foot} % 总高度=5ex(ht)+0.5ex(dp)
+      \usebeamerfont{section in head/foot}%
+      \vbox to 4ex{\vfil % 内容区域高度
+        \insertsectionnavigationhorizontal{0.85\paperwidth}{}{} % 修正2：微调导航栏宽度
+        \vfil}%
     \end{beamercolorbox}%
   \fi%
 }
 
-% 定义框架标题的模板
-\defbeamertemplate*{frametitle}{zju theme}{%
-  \nointerlineskip% % 不插入行间距
-  %\vskip-2pt% % 可选：调整标题与上方内容的间距
-  \hbox{\leavevmode % 创建一个水平盒子
-    \advance\beamer@leftmargin by -12bp% % 向左移动边距
-    \advance\beamer@rightmargin by -12bp% % 向右移动边距
-    \beamer@tempdim=\textwidth% % 将临时变量设置为文本宽度
-    \advance\beamer@tempdim by \beamer@leftmargin% % 加上左边距
-    \advance\beamer@tempdim by \beamer@rightmargin% % 加上右边距
-    \hskip-\Gm@lmargin\hbox{% % 向左移动边距并创建一个新的水平盒子
-      \setbox\beamer@tempbox=\hbox{\begin{minipage}[b]{\paperwidth}% % 创建一个最小宽度为纸宽的盒子
-          \vbox{}\vskip-.75ex% % 垂直盒子，调整上方间距
-          \leftskip0.3cm% % 设置左侧缩进
-          \rightskip0.3cm plus1fil\leavevmode % 设置右侧缩进并允许扩展
-          \insertframetitle% % 插入框架标题
-          \ifx\insertframesubtitle\@empty% % 检查是否有副标题
-            \strut\par% % 如果没有副标题，插入一个空段落
-          \else
-            \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}% % 如果有副标题，插入副标题
-          \fi%
-          \nointerlineskip% % 不插入行间距
-          \vbox{}% % 创建一个空的垂直盒子
-        \end{minipage}}% % 结束最小宽度盒子
-      \beamer@tempdim=\ht\beamer@tempbox% % 获取临时盒子的高度
-      \advance\beamer@tempdim by 2pt% % 增加2pt的高度
-      % 创建一个pgf图形，用于框架标题的背景
-      \begin{pgfpicture}{0.1mm}{0pt}{1.01\paperwidth}{\beamer@tempdim} % 创建一个pgf图形
-        \usebeamercolor{frametitle right} % 使用框架标题右侧的颜色
-        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}} % 定义矩形路径
-        \pgfusepath{clip} % 使用路径进行剪切
-        \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}} % 插入渐变背景
-      \end{pgfpicture} % 结束pgf图形
-      \hskip-\paperwidth% % 向左移动纸宽
-      \box\beamer@tempbox% % 插入临时盒子
-    }%
-    \hskip-\Gm@rmargin% % 向右移动边距
-  }%
-  %  \nointerlineskip % 不插入行间距
-  %    \vskip-0.2pt % 可选：调整标题与下方内容的间距
-  %    \hbox to\textwidth{\hskip-\Gm@lmargin\pgfuseshading{beamer@topshade}\hskip-\Gm@rmargin} % 可选：创建一个水平盒子并插入渐变背景
-  %    \vskip-2pt % 可选：调整间距
+% 设置标题行颜色
+\setbeamercolor{section in head/foot}{
+  bg=white,
+  fg=gray!60
 }
+\setbeamercolor{section in head/foot current}{
+  fg=gray!90
+}
+
+% 设置标题行字体
+\setbeamerfont{section in head/foot}{
+  size=\fontsize{7}{10}\selectfont,  % 使用数字调整字体大小，设置为8pt，行距为10pt
+}
+
+
+% ======================================== 框架标题设置 ========================================
+% 设置框架标题颜色
+\setbeamercolor{frametitle}{bg=white, fg=structure.fg}  % 纯白背景，文字颜色继承结构色
+\setbeamercolor{framesubtitle}{fg=gray}  % 子标题灰色
+
+% 设置框架标题字体
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\normalsize, shape=\itshape}
+
+% 定义 RGB 颜色（颜色值范围 0-255）
+\definecolor{myblue}{RGB}{0,0,255}   % 深蓝
+\definecolor{mygreen}{RGB}{0,120,0}  % 深绿
+
+% 添加渐变背景，从深蓝到深绿
+\pgfdeclarehorizontalshading{titlebottleedge}{52pt}{
+  color(0)=(mygreen!60); % 设置起始颜色为深蓝
+  color(22pt)=(myblue!60); % 设置中间颜色为深绿
+  color(52pt)=(mygreen!60) % 设置结束颜色为深蓝
+}
+
+% 自定义框架标题模板
+\defbeamertemplate*{frametitle}{ffbeamer theme}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[wd=\paperwidth, leftskip=1em, sep=0.1em, dp=0.5em]{frametitle}% 左对齐+边距+下边距
+    \usebeamerfont{frametitle}\insertframetitle%
+    \ifx\insertframesubtitle\@empty\else%
+      \\[-0.2em]%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}%
+    \fi%
+  \end{beamercolorbox}%
+  % 添加渐变带
+  \begin{tikzpicture}[remember picture, overlay]
+    \shade[shading=titlebottleedge] 
+          ([yshift=-2.33em]current page.north west) rectangle ([yshift=-2.53em]current page.north east);
+  \end{tikzpicture}
+  \vskip-0.5ex% 调整标题与内容间距
+}
+
+
+% ======================================== 背景设置 ========================================
+% 加载背景logo
+\pgfdeclareimage[height=0.8\paperheight]{bg}{res/school_logo/henan-university.png}
+
+% 定义 RGB 颜色（颜色值范围 0-255）
+\definecolor{mycyan}{RGB}{0,200,255}   % 青色
+\definecolor{mylavender}{RGB}{220,105,200}  % 蓝紫色
+
+% 添加渐变背景
+\pgfdeclarehorizontalshading{pagebackground}{70pt}{
+  color(0)=(mylavender!7); % 设置绿色透明度为50%
+  color(70)=(mycyan!7) % 设置绿色透明度为50%
+}
+ 
+\setbeamertemplate{background}{% [^2]
+  \begin{tikzpicture}[remember picture, overlay]
+    % 主背景层：全页面渐变
+    \shade[shading=pagebackground,shading angle=-45] 
+          (current page.south west) rectangle (current page.north east);
+    
+    % Logo 层（坐标适配页面中心）
+    \node[opacity=0.05] at ([xshift=6.4cm, yshift=-0.4cm]current page.center) 
+      {\pgfuseimage{bg}};
+  \end{tikzpicture}
+}
+
+% % 在每帧开头插入绝对定位的logo
+% \addtobeamertemplate{frametitle}{}{%
+%   \begin{tikzpicture}[remember picture, overlay]
+%     \node[anchor=north east, inner sep=0pt] 
+%       at ($(current page.north east)+(-0.8cm,-0.1cm)$) 
+%       {\includegraphics[height=1.4cm]{res/school_logo/henan-university.png}};
+%   \end{tikzpicture}
+% }
