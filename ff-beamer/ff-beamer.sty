@@ -82,7 +82,7 @@
     \begin{beamercolorbox}[wd=\paperwidth,ht=6ex,dp=0ex]{section in head/foot} % 总高度=5ex(ht)+0.5ex(dp)
       \usebeamerfont{section in head/foot}%
       \vbox to 4ex{\vfil % 内容区域高度
-        \insertsectionnavigationhorizontal{0.85\paperwidth}{}{} % 修正2：微调导航栏宽度
+        \insertsectionnavigationhorizontal{\paperwidth}{}{} % 修正2：微调导航栏宽度
         \vfil}%
     \end{beamercolorbox}%
   \fi%
@@ -99,7 +99,7 @@
 
 % 设置标题行字体
 \setbeamerfont{section in head/foot}{
-  size=\fontsize{7}{10}\selectfont,  % 使用数字调整字体大小，设置为8pt，行距为10pt
+  size=\fontsize{6}{10}\selectfont,  % 使用数字调整字体大小，设置为8pt，行距为10pt
 }
 
 
@@ -140,7 +140,6 @@
   \end{tikzpicture}
   \vskip-0.5ex% 调整标题与内容间距
 }
-
 
 % ======================================== 背景设置 ========================================
 % 加载背景logo

@@ -1,7 +1,0 @@
-\beamer@sectionintoc {1}{Beamer 基础简介与列表}{3}{0}{1}
-\beamer@sectionintoc {2}{Block 环境的使用}{4}{0}{2}
-\beamer@sectionintoc {3}{数学公式与自定义命令}{5}{0}{3}
-\beamer@sectionintoc {4}{图片与表格}{6}{0}{4}
-\beamer@sectionintoc {5}{动态效果与动画与使用 TikZ 绘图}{7}{0}{5}
-\beamer@sectionintoc {6}{参考文献}{8}{0}{6}
-\beamer@sectionintoc {7}{结束}{9}{0}{7}
