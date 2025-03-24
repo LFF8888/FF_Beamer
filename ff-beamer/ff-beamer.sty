@@ -39,13 +39,16 @@
 
 
 % ======================================== 颜色设置 ========================================
-% % 在文档开始时执行的命令
-% \AtBeginDocument{
-%   % 声明垂直渐变，用于框架顶部的背景
-%   \pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{%
-%     color(0pt)=(bg);
-%     color(4pt)=(pink!50!bg)}
-% }
+% 定义 RGB 颜色（颜色值范围 0-255）
+\definecolor{myblue}{RGB}{0,0,255}   % 深蓝
+\definecolor{mygreen}{RGB}{0,120,0}  % 深绿
+
+% 添加渐变背景，从深蓝到深绿
+\pgfdeclarehorizontalshading{titlebottleedge}{2.5pt}{
+  color(0bp)=(mygreen!60); % 设置起始颜色为深绿
+  color(.5\paperwidth)=(myblue!60); % 设置中间颜色为深蓝
+  color(\paperwidth)=(mygreen!60) % 设置结束颜色为深绿
+}
 
 % ======================================== 底部线设置 ========================================
 % 底部线：作者 | 标题 | 日期 | 幻灯片编号
@@ -112,32 +115,58 @@
 \setbeamerfont{frametitle}{size=\Large, series=\bfseries}
 \setbeamerfont{framesubtitle}{size=\normalsize, shape=\itshape}
 
-% 定义 RGB 颜色（颜色值范围 0-255）
-\definecolor{myblue}{RGB}{0,0,255}   % 深蓝
-\definecolor{mygreen}{RGB}{0,120,0}  % 深绿
-
-% 添加渐变背景，从深蓝到深绿
-\pgfdeclarehorizontalshading{titlebottleedge}{52pt}{
-  color(0)=(mygreen!60); % 设置起始颜色为深蓝
-  color(22pt)=(myblue!60); % 设置中间颜色为深绿
-  color(52pt)=(mygreen!60) % 设置结束颜色为深蓝
-}
-
 % 自定义框架标题模板
 \defbeamertemplate*{frametitle}{ffbeamer theme}{%
+  % \vspace*{1ex}% 添加顶部垂直间距，将整个标题区域下移
   \nointerlineskip%
-  \begin{beamercolorbox}[wd=\paperwidth, leftskip=1em, sep=0.1em, dp=0.5em]{frametitle}% 左对齐+边距+下边距
-    \usebeamerfont{frametitle}\insertframetitle%
-    \ifx\insertframesubtitle\@empty\else%
-      \\[-0.2em]%
-      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}%
-    \fi%
-  \end{beamercolorbox}%
-  % 添加渐变带
-  \begin{tikzpicture}[remember picture, overlay]
-    \shade[shading=titlebottleedge] 
-          ([yshift=-2.33em]current page.north west) rectangle ([yshift=-2.53em]current page.north east);
-  \end{tikzpicture}
+  
+  % 根据是否有副标题设置不同的固定高度
+  \ifx\insertframesubtitle\@empty%
+    % 无副标题时的标题框 - 使用2.5em的固定高度
+    \begin{beamercolorbox}[
+      wd=\paperwidth,       % 宽度等于页面宽度
+      ht=1.5em,             % 固定高度为2em（无副标题） 
+      dp=0em,             % 底部额外深度
+      leftskip=1em,         % 左侧边距
+      sep=0.1em             % 内部间距
+    ]{frametitle}%
+      \vbox to 2.5em{%
+        \vspace*{0.8em}% 在标题文本前增加少量空间
+        \vfil\usebeamerfont{frametitle}\insertframetitle\vfil%
+      }% 垂直居中
+    \end{beamercolorbox}%
+    
+    % 无副标题情况下的渐变带 - 直接跟随标题框底部
+    \nointerlineskip % 确保没有行间距
+    \begin{beamercolorbox}[wd=\paperwidth,ht=0.15em,dp=0pt,center]{empty}
+      \pgfuseshading{titlebottleedge}
+    \end{beamercolorbox}%
+  \else%
+    % 有副标题时的标题框 - 使用3.5em的固定高度
+    \begin{beamercolorbox}[
+      wd=\paperwidth,       % 宽度等于页面宽度
+      ht=2.4em,             % 固定高度为3.5em（有副标题）
+      dp=0em,             % 底部额外深度
+      leftskip=0.8em,         % 左侧边距
+      sep=0.1em             % 内部间距
+    ]{frametitle}%
+      % 在固定高度框内垂直排列主标题和副标题
+      \vbox to 3.5em{%
+        \vspace*{1em}% 在标题文本前增加少量空间
+        \vfil% 顶部填充
+        \usebeamerfont{frametitle}\insertframetitle%
+        \\[-0.1em]% 微调标题与副标题间距
+        {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}%
+        \vfil% 底部填充
+      }%
+    \end{beamercolorbox}%
+    
+    % 有副标题情况下的渐变带 - 直接跟随标题框底部
+    \nointerlineskip % 确保没有行间距
+    \begin{beamercolorbox}[wd=\paperwidth,ht=0.15em,dp=0pt,center]{empty}
+      \pgfuseshading{titlebottleedge}
+    \end{beamercolorbox}%
+  \fi%
   \vskip-0.5ex% 调整标题与内容间距
 }
 
